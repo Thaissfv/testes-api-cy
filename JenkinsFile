@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clonar repositório') {
+            steps {
+               git branch: 'main', url: 'https://github.com/Thaissfv/testes-api-cy.git'
+            }
+        }
+         stage('Instalar Dependências') {
+            steps {
+                sh 'npm install'
+            }
+        }
+         stage('Executar Teste') {
+            steps {
+                sh 'npm run cy:run-ci'
+            }
+         }
+    }
+}
